@@ -13,11 +13,11 @@ class NavContainer extends Component{
       <div>
       <nav>
         <ul style={styles.base}>
-        <li style={styles.text}><h3 onClick={this.props.onClick}>Singki</h3></li>
+        <li style={styles.text}><h5 onClick={this.props.onClick}>Singki</h5></li>
         <li style={styles.li}><Explore value={value}
                  onChange={this.props.onChange}/></li>
-        <li style={styles.li}><Signin/></li>
-        <li style={styles.li}><QA/></li>
+        <li style={styles.text}><Signin/></li>
+        <li style={styles.text}><QA/></li>
         </ul>
         </nav>
       </div>
@@ -27,16 +27,17 @@ class NavContainer extends Component{
 
 var styles = {
   base: {
-    height:70,
+    height:80,
     backgroundColor: '#111111',
     listStyleType:'none'
   },
   li: {
     color:'#ffffff',
     float: 'left',
-    padding: 20
+    padding: 25
   },
   text:{
+    padding: 5,
     color:'#ffffff',
     float: 'left'
   }

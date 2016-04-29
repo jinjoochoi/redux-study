@@ -3,7 +3,9 @@ import React,{Component} from 'react'
 class QA extends Component{
   render(){
     return(
-      <div>QA</div>
+      <div>
+      <h5>QA</h5>
+      </div>
     )
   }
 }

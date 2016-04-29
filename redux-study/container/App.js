@@ -24,7 +24,7 @@ class App extends Component{
     console.log("children");
     return(
     <div>
-    <NavContainer value={inputValue}  // 기본적으로 맨위에 계속띄우는 NavContainer
+    <NavContainer value={inputValue}  
                  onChange={this.handleChange}
                  onClick={this.goHomePage}/>
     {children}
