@@ -31,8 +31,8 @@ class SearchResultPage extends Component{
     }
   }
   renderTrack(track) {
-    var pageCount = this.props.pageCount
-    var key = uniqueId(pageCount.toString());
+
+    var key = uniqueId('');
     console.log(key);
       return (
         <Track track = {track}
@@ -69,7 +69,6 @@ SearchResultPage.PropTypes = {
   loadLyrics : PropTypes.func.isRequired,
   loadMoreLyrics : PropTypes.func.isRequired,
   trackPagination : PropTypes.object,
-  pageCount : PropTypes.number
 
 }
 
@@ -84,14 +83,11 @@ function mapStateToProps(state, ownProps) {
 
   const trackPagination = lyrics[text] || { trackMatches: [] }
   const trackMatches = trackPagination.trackMatches;
-  const pageCount = trackPagination.pageCount;
 
   return {
     text : text,
     trackMatches,
-    trackPagination,
-    pageCount
-  }
+    trackPagination  }
 
 }
 export default connect(mapStateToProps, {

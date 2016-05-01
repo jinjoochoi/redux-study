@@ -20,7 +20,7 @@ function fetchMoreLyrics(text, nextPageUrl) {
   return {
     text,
     [CALL_API]: {
-      types: [ LYRIC_REQUEST, LYRIC_SUCCESS, LYRIC_FAILURE ],
+      type: [ LYRIC_REQUEST, LYRIC_SUCCESS, LYRIC_FAILURE ],
       endpoint: nextPageUrl+`&track=${text}`
     }
   }
