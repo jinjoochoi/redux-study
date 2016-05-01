@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 import api from '../api/LastFmApi'
 import rootReducer from '../reducer'
+import DevTools from '../DevTools'
 
 
 export default function configureStore(initialState) {
@@ -10,7 +11,9 @@ export default function configureStore(initialState) {
     rootReducer,
     initialState,
     compose(
-      applyMiddleware(thunk, api, createLogger())
+      applyMiddleware(thunk, api, createLogger()),
+      DevTools.instrument()
+
     )
   )
 
