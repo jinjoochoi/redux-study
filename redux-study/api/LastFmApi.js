@@ -12,7 +12,12 @@ const API_ROOT = 'http://ws.audioscrobbler.com/2.0/?method=track.search&api_key=
 // and keep it updated as we fetch more data.
 
 // Read more about Normalizr: https://github.com/gaearon/normalizr
+function getNextPageUrl(json) {
+  const currentPage = Number(json.results['opensearch:Query'].startPage);
 
+  return API_ROOT+'&page='+(currentPage+1);
+
+}
 const trackSchema = new Schema('results',{
   idAttribute:'results'
 })
@@ -37,7 +42,7 @@ export const CALL_API = Symbol('Call API')
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
 function callApi(endpoint, schema) {
-  console.log("callApi");
+  console.log("callApi!@@!");
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
 
   return fetch(fullUrl)
@@ -49,11 +54,11 @@ function callApi(endpoint, schema) {
       }
 
       const camelizedJson = camelizeKeys(json)
-      console.log("json");
-      console.log(camelizedJson);
 
+      const nextPageUrl = getNextPageUrl(json,endpoint);
       return Object.assign({},
-      camelizedJson
+      camelizedJson,
+      {nextPageUrl}
       )
     })
 }
@@ -67,14 +72,12 @@ function callApi(endpoint, schema) {
 // Performs the call and promises when such actions are dispatched.
 
 export default store => next => action => {
-  console.log("call api")
 
   const callAPI = action[CALL_API]
-  console.log(callAPI)
 
-
+  console.log("action");
+  console.log(action);
   if (typeof callAPI === 'undefined') {
-    console.log("undefined")
     return next(action)
   }
 
@@ -84,10 +87,13 @@ export default store => next => action => {
   if (typeof endpoint !== 'string') {
     throw new Error('Specify a string endpoint URL.')
   }
-  console.log(schema);
 
   function actionWith(data) {
     const finalAction = Object.assign({}, action, data)
+    console.log(data);
+    console.log(action);
+    console.log(finalAction);
+    console.log("*--");
     delete finalAction[CALL_API]
     return finalAction
   }
@@ -99,7 +105,7 @@ export default store => next => action => {
       response,
       type: successType
     })),
-    error => next(actionWith({ 
+    error => next(actionWith({
       type: failureType,
       error: error.message || 'Something bad happened'
     }))

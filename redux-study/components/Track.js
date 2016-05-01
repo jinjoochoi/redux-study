@@ -15,13 +15,12 @@ export default class Track extends Component {
 
     return (
       <div>
-      <li>
       {element}
-      </li>
       </div>
     )
   }
 }
+
 Track.propTypes = {
   track : PropTypes.object.isRequired
 }

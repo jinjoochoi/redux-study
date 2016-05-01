@@ -20,11 +20,10 @@ class App extends Component{
   }
   render(){
     const { children, inputValue } = this.props
-    console.log(children);
-    console.log("children");
+  
     return(
     <div>
-    <NavContainer value={inputValue}  
+    <NavContainer value={inputValue}
                  onChange={this.handleChange}
                  onClick={this.goHomePage}/>
     {children}
