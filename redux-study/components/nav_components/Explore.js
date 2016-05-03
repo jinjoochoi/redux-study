@@ -21,6 +21,9 @@ class Explore extends Component{
   getInputValue() {
     return this.refs.input.value
   }
+  setInputValue(val) {
+    this.refs.input.value = val
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.value !== this.props.value) {
@@ -31,8 +34,10 @@ class Explore extends Component{
   render(){
     return(
       <div>
-      <input type="text" ref="input"
-              onKeyUp={this.handleKeyUp} />
+      <input  type="text"
+              ref="input"
+              onKeyUp={this.handleKeyUp}
+              defaultValue={this.props.value}/>
 
       <button onClick={this.handleGoClick} >Search</button>
 

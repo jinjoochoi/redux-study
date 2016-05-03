@@ -47,7 +47,10 @@ class Login extends Component{
 }
 var styles = {
   title:{
-    marginLeft: '30%'
+    textAlign: 'right',
+    marginTop: '50px',
+    marginRight: '164px',
+    size:'30pt'
   },
   ul: {
     listStyleType:'none'
@@ -59,6 +62,7 @@ var styles = {
 
   },
   input:{
+
     marginLeft:-10,
     marginTop:10,
     width:'90%',

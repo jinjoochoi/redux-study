@@ -69,6 +69,7 @@ SearchResultPage.PropTypes = {
   loadLyrics : PropTypes.func.isRequired,
   loadMoreLyrics : PropTypes.func.isRequired,
   trackPagination : PropTypes.object,
+  pageCount : PropTypes.number
 
 }
 
@@ -83,11 +84,13 @@ function mapStateToProps(state, ownProps) {
 
   const trackPagination = lyrics[text] || { trackMatches: [] }
   const trackMatches = trackPagination.trackMatches;
+  const pageCount = trackPagination.pageCount;
 
   return {
     text : text,
     trackMatches,
-    trackPagination  }
+    trackPagination,
+  }
 
 }
 export default connect(mapStateToProps, {

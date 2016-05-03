@@ -20,7 +20,7 @@ class App extends Component{
   }
   render(){
     const { children, inputValue } = this.props
-  
+
     return(
     <div>
     <NavContainer value={inputValue}
@@ -43,7 +43,7 @@ App.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     errorMessage: state.errorMessage,
-    inputValue: 'default'
+    inputValue: ownProps.location.pathname.substring(8)
   }
 }
 

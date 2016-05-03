@@ -35,15 +35,16 @@ export const Schemas = {
 }
 
 
-// Action key that carries API call info interpreted by this Redux middleware.
-export const CALL_API = Symbol('Call API')
 
 
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
 function callApi(endpoint, schema) {
-  console.log("callApi!@@!");
+  console.log("callApi!!");
+
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
+
+  console.log(fullUrl);
 
   return fetch(fullUrl)
     .then(response =>
@@ -55,7 +56,7 @@ function callApi(endpoint, schema) {
 
       const camelizedJson = camelizeKeys(json)
 
-      const nextPageUrl = getNextPageUrl(json,endpoint);
+      const nextPageUrl = getNextPageUrl(json);
       return Object.assign({},
       camelizedJson,
       {nextPageUrl}
@@ -67,16 +68,19 @@ function callApi(endpoint, schema) {
 
 
 
+// Action key that carries API call info interpreted by this Redux middleware.
+export const CALL_API = Symbol('Call API')
 
 // A Redux middleware that interprets actions with CALL_API info specified.
 // Performs the call and promises when such actions are dispatched.
 
 export default store => next => action => {
 
+  console.log(action);
   const callAPI = action[CALL_API]
 
-  console.log("action");
-  console.log(action);
+
+
   if (typeof callAPI === 'undefined') {
     return next(action)
   }
